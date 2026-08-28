@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Happy Raksha Bandhan 💗</title>
+<meta name="description" content="A little surprise for someone special." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Caveat:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ambient background layer, lives behind every scene -->
+<div class="bg-ambient" aria-hidden="true">
+  <div class="bg-gradient"></div>
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+  <canvas id="particle-canvas"></canvas>
+</div>
+
+<!-- tiny hidden detail: a star that reveals a secret line -->
+<button id="hidden-star" class="hidden-star" aria-label="a little star">✦</button>
+<div id="hidden-star-msg" class="hidden-star-msg"></div>
+
+<!-- music toggle, present on every scene -->
+<button id="music-toggle" class="music-toggle" aria-label="toggle music">
+  <span class="music-icon">🎵</span>
+</button>
+
+<!-- progress thread: a rakhi-inspired thread that "ties" as you move through scenes -->
+<div class="thread-progress" aria-hidden="true">
+  <svg viewBox="0 0 320 14" preserveAspectRatio="none">
+    <path id="thread-path" d="M2,7 C 60,2 100,12 160,7 C 220,2 260,12 318,7" />
+  </svg>
+</div>
+
+<main id="app">
+
+  <!-- ============ SCENE 1 : MAGICAL INTRO ============ -->
+  <section class="scene scene-active" id="scene-1" data-scene="1">
+    <div class="scene-inner intro-inner">
+      <div class="envelope-wrap" id="envelope">
+        <svg class="envelope-svg" viewBox="0 0 200 150" aria-hidden="true">
+          <defs>
+            <linearGradient id="envGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FBD8E0"/>
+              <stop offset="100%" stop-color="#F4A6C1"/>
+            </linearGradient>
+          </defs>
+          <rect x="10" y="30" width="180" height="110" rx="10" fill="url(#envGrad)"/>
+          <path d="M10,35 L100,105 L190,35" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="env-flap" d="M10,35 L100,95 L190,35 L190,32 L100,90 L10,32 Z" fill="#F7BCD1"/>
+          <circle class="env-heart" cx="100" cy="70" r="9" fill="#C24E71"/>
+        </svg>
+        <div class="envelope-glow"></div>
+      </div>
+
+      <p class="intro-line intro-line-1" data-text="Hey Sis... 💗"></p>
+      <p class="intro-line intro-line-2" data-text="I made something small for you."></p>
+
+      <button class="btn btn-primary btn-glow" id="btn-open-surprise">
+        <span>Open Your Surprise</span> <span class="btn-sparkle">✨</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 2 : RAKSHA BANDHAN REVEAL ============ -->
+  <section class="scene" id="scene-2" data-scene="2">
+    <div class="scene-inner reveal-inner">
+      <div class="rakhi-wrap" aria-hidden="true">
+        <svg viewBox="0 0 120 120" class="rakhi-svg">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#D4A857" stroke-width="1.5" opacity="0.5"/>
+          <g class="rakhi-thread">
+            <path d="M10,60 C 30,40 30,80 60,60 C 90,40 90,80 110,60" fill="none" stroke="#E7B8C9" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <circle cx="60" cy="60" r="26" fill="#FBD8E0"/>
+          <circle cx="60" cy="60" r="26" fill="none" stroke="#D4A857" stroke-width="2"/>
+          <g fill="#C24E71">
+            <circle cx="60" cy="42" r="4"/>
+            <circle cx="78" cy="60" r="4"/>
+            <circle cx="60" cy="78" r="4"/>
+            <circle cx="42" cy="60" r="4"/>
+          </g>
+          <circle cx="60" cy="60" r="9" fill="#D4A857"/>
+        </svg>
+      </div>
+
+      <h1 class="headline" id="rb-headline" aria-label="Happy Raksha Bandhan, Sis!">
+        <span class="word">Happy</span> <span class="word">Raksha</span> <span class="word">Bandhan,</span> <span class="word">Sis!</span> <span class="word">🩷</span>
+      </h1>
+
+      <p class="reveal-sub">Today's a little reminder of how special you are to me.</p>
+
+      <button class="btn btn-outline" id="btn-more-1">There's More <span class="btn-sparkle">💫</span></button>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 3 : MEMORY CARDS ============ -->
+  <section class="scene" id="scene-3" data-scene="3">
+    <div class="scene-inner memory-inner">
+      <p class="eyebrow">from the archives</p>
+      <h2 class="section-heading">A Little Something<br/>From Your Brother 💌</h2>
+
+      <div class="memory-photo-frame polaroid" id="photo-1-frame">
+        <img id="memory-photo-1" src="assets/photo1.jpg" alt="" />
+        <p class="polaroid-cap" id="memory-photo-1-cap"></p>
+      </div>
+
+      <div class="card-grid" id="memory-cards"></div>
+
+      <button class="btn btn-outline" id="btn-more-2">Keep Going <span class="btn-sparkle">🎁</span></button>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 4 : MYSTERY GIFT ============ -->
+  <section class="scene" id="scene-4" data-scene="4">
+    <div class="scene-inner gift-inner">
+      <div class="fun-photo-frame scrapbook" id="photo-2-frame">
+        <img id="memory-photo-2" src="assets/photo2.jpg" alt="" />
+        <p class="scrapbook-cap" id="memory-photo-2-cap"></p>
+      </div>
+
+      <p class="gift-line" id="gift-line-1">Okay... I have one more surprise for you 🎁</p>
+      <p class="gift-line gift-line-2" id="gift-line-2">Tap the gift to open it.</p>
+
+      <div class="gift-box-wrap" id="gift-box">
+        <svg viewBox="0 0 160 150" class="gift-svg">
+          <g id="gift-lid" class="gift-lid">
+            <rect x="15" y="35" width="130" height="26" rx="6" fill="#F4A6C1"/>
+            <rect x="70" y="35" width="20" height="26" fill="#D4A857"/>
+          </g>
+          <rect x="25" y="61" width="110" height="75" rx="6" fill="#FBD8E0"/>
+          <rect x="70" y="61" width="20" height="75" fill="#D4A857"/>
+          <path d="M60,35 C40,10 30,30 45,40 C 55,46 65,40 60,35 Z" fill="#D4A857" opacity="0.9"/>
+          <path d="M100,35 C120,10 130,30 115,40 C105,46 95,40 100,35 Z" fill="#D4A857" opacity="0.9"/>
+        </svg>
+        <div class="gift-burst" id="gift-burst" aria-hidden="true"></div>
+      </div>
+
+      <div class="gift-card" id="gift-card">
+        <div class="fancy-photo-frame film" id="photo-3-frame">
+          <img id="memory-photo-3" src="assets/photo3.jpg" alt="" />
+        </div>
+        <h3 id="gift-card-heading">For My Sister 💗</h3>
+        <p id="gift-card-message"></p>
+        <p class="signature" id="gift-card-signature">With Love, Your Brother ❤️</p>
+        <button class="btn btn-primary" id="btn-more-3">Before You Leave <span class="btn-sparkle">😌</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 5 : PICK ONE ============ -->
+  <section class="scene" id="scene-5" data-scene="5">
+    <div class="scene-inner pick-inner">
+      <p class="eyebrow">before you leave...</p>
+      <h2 class="section-heading">Pick One.</h2>
+
+      <div class="pick-grid" id="pick-grid">
+        <button class="pick-card" data-pick="secret">
+          <span class="pick-emoji">🌸</span>
+          <span class="pick-label">A Secret</span>
+        </button>
+        <button class="pick-card" data-pick="memory">
+          <span class="pick-emoji">🎀</span>
+          <span class="pick-label">A Memory</span>
+        </button>
+        <button class="pick-card" data-pick="surprise">
+          <span class="pick-emoji">🎁</span>
+          <span class="pick-label">One Last Surprise</span>
+        </button>
+      </div>
+
+      <div class="pick-reveal" id="pick-reveal">
+        <p id="pick-reveal-text"></p>
+      </div>
+
+      <button class="btn btn-primary hidden" id="btn-to-final">Continue <span class="btn-sparkle">✨</span></button>
+    </div>
+  </section>
+
+  <!-- ============ FINAL SCENE ============ -->
+  <section class="scene" id="scene-6" data-scene="6">
+    <div class="scene-inner final-inner">
+
+      <div class="cinematic-photo-frame glass" id="photo-4-frame">
+        <img id="memory-photo-4" src="assets/photo4.jpg" alt="" />
+      </div>
+
+      <h1 class="final-headline">Happy Raksha Bandhan, <span id="final-sister-name">Sis</span>! 💗</h1>
+      <p class="final-sub">Always keep smiling.</p>
+      <p class="final-tiny" id="final-made-by">Made specially for you by your brother.</p>
+
+      <div class="last-photo-frame floating-card" id="photo-5-frame">
+        <img id="memory-photo-5" src="assets/photo5.jpg" alt="" />
+        <p class="floating-cap" id="memory-photo-5-cap"></p>
+      </div>
+
+      <div class="made-with-love">Made with ❤️</div>
+
+      <button class="btn btn-outline" id="btn-replay">Replay Our Little Surprise <span class="btn-sparkle">↻</span></button>
+
+      <p class="final-secret" id="final-secret"></p>
+    </div>
+  </section>
+
+</main>
+
+<audio id="bg-music" loop preload="none">
+  <source src="assets/music.mp3" type="audio/mpeg" />
+</audio>
+
+<div class="sfx-pool" aria-hidden="true">
+  <audio id="sfx-click" preload="none"><source src="assets/click.mp3" type="audio/mpeg" /></audio>
+  <audio id="sfx-open" preload="none"><source src="assets/open.mp3" type="audio/mpeg" /></audio>
+  <audio id="sfx-sparkle" preload="none"><source src="assets/sparkle.mp3" type="audio/mpeg" /></audio>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
